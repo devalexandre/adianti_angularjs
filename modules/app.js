@@ -1,4 +1,4 @@
-var app = angular.module('progs', ['ngRoute'])
+var app = angular.module('progs', ['ngRoute','AdiantiService'])
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
@@ -12,16 +12,16 @@ var app = angular.module('progs', ['ngRoute'])
 app.controller('HomeController',HomeController);
 
 
-function HomeController($scope,$http) {
-  
-  $http.get('api/engine.php?class=Home&method=home').then(
+function HomeController($scope,$http,$adianti) {
+
+  $adianti.get('Home','home').then(
     function(res){
       $scope.title = res.data.title;
     }
   )
- 
-  
+
+
 }
 
 
-HomeController['$inject'] = ['$scope','$http'];
+HomeController['$inject'] = ['$scope','$http','$adianti'];
